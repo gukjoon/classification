@@ -13,7 +13,7 @@ class ClassifierLoader:
   def __init__(self, image_generator, label_generator, label_map, transforms_in):
     self.image_gen = list(image_generator)
     
-    self.label_gen = [i.read().decode('utf-8').strip() for i in label_generator]
+    self.label_gen = [i.result.read().decode('utf-8').strip() for i in label_generator]
     self.label_map = label_map
         
     # analyze labels    
