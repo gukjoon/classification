@@ -14,6 +14,7 @@ class ClassifierLoader:
     self.image_gen = list(image_generator)
     
     self.label_gen = [i.result.read().decode('utf-8').strip() for i in label_generator]
+    print(self.label_gen)
     self.label_map = label_map
         
     # analyze labels    
