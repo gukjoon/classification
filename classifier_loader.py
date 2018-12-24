@@ -13,7 +13,7 @@ class ClassifierLoader:
   def __init__(self, image_generator, label_generator, label_map, transforms_in):
     self.image_gen = list(image_generator)
     
-    self.label_gen = list(map(read_label, label_generator))
+    self.label_gen = [i.read().decode('utf-8').strip() for i in label_generator]
     self.label_map = label_map
         
     # analyze labels    
@@ -29,7 +29,7 @@ class ClassifierLoader:
     if image.mode == 'RGBA':
       background = Image.new('RGBA', image.size, (255,255,255))
       image = Image.alpha_composite(background, image).convert('RGB')
-    
+
     label = self.label_map[self.label_gen[index]]
     return (self.transform(image), label)
 
