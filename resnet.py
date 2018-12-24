@@ -3,7 +3,7 @@ from fastai.callbacks.hooks import num_features_model
 import torchvision.models as models
 import torch.nn as nn
 
-def resnext50(classes):
+def resnet(classes):
     base_model = models.resnet50(pretrained=True)
     body = nn.Sequential(*list(base_model.children())[:-2])
     nf = num_features_model(body) * 2
