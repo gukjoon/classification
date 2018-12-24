@@ -4,19 +4,11 @@ import torchvision.transforms as transforms
 import torch
 import numpy as np
 
-def one_hot(x, c):
-    res = np.zeros(c, np.int_)
-    res[x] = 1.
-    return res
-
 class ClassifierLoader:
   def __init__(self, image_generator, label_generator, label_map, transforms_in):
     self.image_gen = list(image_generator)
     
-    label_generator = list(label_generator)
-    print([i.result for i in label_generator])
-    self.label_gen = [open(i.result).read().strip() for i in label_generator]
-    print(self.label_gen)
+    self.label_gen = [i.result.read().strip().decode('utf-8') for i in label_generator]
     self.label_map = label_map
         
     # analyze labels    
@@ -33,8 +25,6 @@ class ClassifierLoader:
       background = Image.new('RGBA', image.size, (255,255,255))
       image = Image.alpha_composite(background, image).convert('RGB')
 
-    print('GET ITEM', index, self.label_gen[index])
-    print('=======')
     label = self.label_map[self.label_gen[index]]
     return (self.transform(image), label)
 
