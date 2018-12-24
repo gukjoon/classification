@@ -30,7 +30,8 @@ class ClassifierLoader:
       background = Image.new('RGBA', image.size, (255,255,255))
       image = Image.alpha_composite(background, image).convert('RGB')
 
-    print(index, self.label_gen[index])
+    print('GET ITEM', index, self.label_gen[index])
+    print('=======')
     label = self.label_map[self.label_gen[index]]
     return (self.transform(image), label)
 
