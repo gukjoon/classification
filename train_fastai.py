@@ -31,5 +31,5 @@ def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   learn = Learner(db, model, loss_func=nn.NLLLoss(), metrics=[accuracy])
   learn.precompute = False
   learn.model.cuda()
-  learn.fit(epochs, learning_rate)
+  learn.fit_one_cycle(epochs, learning_rate)
   return model
