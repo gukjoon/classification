@@ -701,7 +701,7 @@ def load_pre(f, fn):
     return m
 
 
-def resnext101(classes): 
+def resnext(classes): 
     base_model = load_pre(resnext_101_64x4d, 'resnext_101_64x4d')
     body = nn.Sequential(*list(base_model.children())[:8])
     head = create_head(4096, classes, None, ps=0.5, bn_final=False)
