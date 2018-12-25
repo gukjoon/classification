@@ -685,8 +685,10 @@ def resnext_101_64x4d(): return nn.Sequential( # Sequential,
   nn.Sequential(Lambda(lambda x: x.view(1,-1) if 1==len(x.size()) else x ),nn.Linear(2048,1000)), # Linear,
 )
 
-def resnext(classes): 
+def resnext(classes, pretrained): 
     base_model = resnext_101_64x4d()
+    state_dict = torch.load(pretrained)
+    base_model.load_state_dict(state_dict)
     body = nn.Sequential(*list(base_model.children())[:8])
     head = create_head(4096, classes, None, ps=0.5, bn_final=False)
     return nn.Sequential(body, head, nn.LogSoftmax())
