@@ -687,7 +687,7 @@ def resnext_101_64x4d(): return nn.Sequential( # Sequential,
 
 def resnext(classes, pretrained): 
     base_model = resnext_101_64x4d()
-    state_dict = torch.load(pretrained)
+    state_dict = torch.load(next(pretrained).result)
     base_model.load_state_dict(state_dict)
     body = nn.Sequential(*list(base_model.children())[:8])
     head = create_head(4096, classes, None, ps=0.5, bn_final=False)
