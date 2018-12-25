@@ -685,24 +685,8 @@ def resnext_101_64x4d(): return nn.Sequential( # Sequential,
   nn.Sequential(Lambda(lambda x: x.view(1,-1) if 1==len(x.size()) else x ),nn.Linear(2048,1000)), # Linear,
 )
 
-
-def load_model(m, p):
-    sd = torch.load(p, map_location=lambda storage, loc: storage)
-    names = set(m.state_dict().keys())
-    for n in list(sd.keys()): # list "detatches" the iterator
-        if n not in names and n+'_raw' in names:
-            if n+'_raw' not in sd: sd[n+'_raw'] = sd[n]
-            del sd[n]
-    m.load_state_dict(sd)
-
-def load_pre(f, fn):
-    m = f()
-    load_model(m, f'{fn}.pth')
-    return m
-
-
 def resnext(classes): 
-    base_model = load_pre(resnext_101_64x4d, 'resnext_101_64x4d')
+    base_model = resnext_101_64x4d()
     body = nn.Sequential(*list(base_model.children())[:8])
     head = create_head(4096, classes, None, ps=0.5, bn_final=False)
     return nn.Sequential(body, head, nn.LogSoftmax())
