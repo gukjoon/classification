@@ -1,8 +1,8 @@
-
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from functools import reduce
+from fastai.vision import create_head
 
 class LambdaBase(nn.Sequential):
     def __init__(self, fn, *args):
