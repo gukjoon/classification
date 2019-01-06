@@ -2,7 +2,7 @@ description:
   Freezes model to a certain layer
 args:
   model: 
-    type: file
+    type: model
   freeze_to:
     type: int
 output:
