@@ -1,0 +1,12 @@
+description: 
+  Creates a Resnext neural network
+args:
+  classes: 
+    type: int
+    description: number of classes at resnext head
+  pretrained:
+    type: file
+    description: pretrained model file
+output:
+  type: model
+

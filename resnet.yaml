@@ -1,0 +1,9 @@
+description: 
+  Creates a vanilla resnet
+args:
+  classes: 
+    type: int
+    description: number of classes at resnet head
+output:
+  type: model
+

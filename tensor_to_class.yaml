@@ -1,0 +1,11 @@
+description: 
+  Converts a tensor result to a string label using a reverse map
+args:
+  tensor: 
+    type: tensor
+  rev_map:
+    type: label_map
+    description: reverse label map
+output:
+  type: bytes
+

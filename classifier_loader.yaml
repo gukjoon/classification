@@ -1,0 +1,12 @@
+description: 
+  Creates pytorch loader for classifier
+args:
+  images_generator: 
+    type: file
+  labels_generator:
+    type: file
+  label_map:
+    type: label_map
+output:
+  type: loader
+reducer: true

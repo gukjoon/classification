@@ -1,0 +1,8 @@
+description: 
+  Creates a reverse label map
+args:
+  label_gen: 
+    type: file
+output:
+  type: label_map
+reducer: true

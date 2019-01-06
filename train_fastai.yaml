@@ -1,0 +1,15 @@
+description: 
+  Trains model using FastAI wrapper
+args:
+  training_data: 
+    type: loader
+  validation_data:
+    type: loader
+  model:
+    type: model
+  epochs:
+    type: int
+  learning_rate:
+    type: float
+output:
+  type: model

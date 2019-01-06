@@ -1,0 +1,10 @@
+description: 
+  Freezes model to a certain layer
+args:
+  model: 
+    type: file
+  freeze_to:
+    type: int
+output:
+  type: model
+
