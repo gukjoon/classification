@@ -13,3 +13,4 @@ args:
     type: float
 output:
   type: model
+gpu: true
