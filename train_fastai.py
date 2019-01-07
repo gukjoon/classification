@@ -1,10 +1,10 @@
-from fastai.basic_train import Learner, LearnerCallback
+from fastai.basic_train import Learner
 from torch.utils.data import DataLoader
 from fastai.basic_data import DataBunch
 from fastai.metrics import accuracy
 from fastai.vision import Image as FImage
 from fastai.vision.transform import get_transforms
-from fastai.callbacks.hooks import HookCallback
+from fastai.callback import Callback
 import torch.nn as nn
 
 tt = get_transforms()[0]
@@ -20,8 +20,8 @@ def apply_tfms(data):
         lab.append(labels)
     return (torch.stack(app).cuda(), torch.cat(lab).cuda())
 
-class KeepAliveLogger(LearnerCallback):
-  def on_batch_end(self, epoch, iteration, last_loss, **kwargs):
+class KeepAliveLogger(Callback):
+  def on_batch_end(self, epoch, iteration, last_loss):
     print("Iteration: ", epoch, iteration, last_loss)
 
 def train_fastai(training_data, validation_data, model, epochs, learning_rate):
