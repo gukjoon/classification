@@ -20,7 +20,6 @@ def apply_tfms(data):
         lab.append(labels)
     return (torch.stack(app).cuda(), torch.cat(lab).cuda())
 
-@dataclass
 class KeepAliveLogger(LearnerCallback):
   def __init__(self, learn):
       super().__init__(learn)
