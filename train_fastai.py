@@ -19,6 +19,10 @@ def apply_tfms(data):
         lab.append(labels)
     return (torch.stack(app).cuda(), torch.cat(lab).cuda())
 
+class KeepAliveLogger(HookCallback):
+  def on_batch_end(self, train, **kwargs):
+    print(kwargs)
+
 def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   db = DataBunch(
     DataLoader(training_data, batch_size=32), 
@@ -28,7 +32,7 @@ def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   )
   db.valid_dl.tfms = None
   db.valid_dl.device = 'cuda'
-  learn = Learner(db, model, loss_func=nn.NLLLoss(), metrics=[accuracy])
+  learn = Learner(db, model, loss_func=nn.NLLLoss(), metrics=[accuracy], callback_fns=[KeepAliveLogger])
   learn.precompute = False
   learn.model.cuda()
   learn.fit_one_cycle(epochs, learning_rate)
