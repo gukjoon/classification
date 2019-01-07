@@ -23,6 +23,8 @@ def apply_tfms(data):
 class KeepAliveLogger(HookCallback):
   def on_batch_end(self, train, **kwargs):
     print(kwargs)
+  def hook(m, i, o):
+    print("shrug")
 
 def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   db = DataBunch(
@@ -33,7 +35,7 @@ def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   )
   db.valid_dl.tfms = None
   db.valid_dl.device = 'cuda'
-  learn = Learner(db, model, loss_func=nn.NLLLoss(), metrics=[accuracy], callback_fns=[KeepAliveLogger])
+  learn = Learner(db, model, loss_func=nn.NLLLoss(), metrics=[accuracy], callback_fns=KeepAliveLogger)
   learn.precompute = False
   learn.model.cuda()
   learn.fit_one_cycle(epochs, learning_rate)
