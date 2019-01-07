@@ -24,8 +24,8 @@ class KeepAliveLogger(LearnerCallback):
   def __init__(self, learn):
       super().__init__(learn)
 
-  def on_batch_end(self, train, **kwargs):
-    print(kwargs)
+  def on_batch_end(self, **kwargs):
+    print(kwargs.get('iteration'))
 
 def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   db = DataBunch(
