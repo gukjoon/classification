@@ -4,6 +4,7 @@ from fastai.basic_data import DataBunch
 from fastai.metrics import accuracy
 from fastai.vision import Image as FImage
 from fastai.vision.transform import get_transforms
+from fastai.callbacks.hooks import HookCallback
 import torch.nn as nn
 
 tt = get_transforms()[0]
