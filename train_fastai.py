@@ -21,11 +21,8 @@ def apply_tfms(data):
     return (torch.stack(app).cuda(), torch.cat(lab).cuda())
 
 class KeepAliveLogger(LearnerCallback):
-  def __init__(self, learn):
-      super().__init__(learn)
-
-  def on_batch_end(self, **kwargs):
-    print(kwargs.get('iteration'))
+  def on_batch_end(self, epoch, iteration, last_loss, **kwargs):
+    print("Iteration: ", epoch, iteration, last_loss)
 
 def train_fastai(training_data, validation_data, model, epochs, learning_rate):
   db = DataBunch(
